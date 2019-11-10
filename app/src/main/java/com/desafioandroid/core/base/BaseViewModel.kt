@@ -14,7 +14,7 @@ abstract class BaseViewModel : ViewModel() {
         value = Resource.error(e)
     }
 
-    protected fun <T> MutableLiveData<Resource<T>>.loading(boolean: Boolean?) {
-        value = Resource.loading(boolean)
+    protected fun <T> MutableLiveData<Resource<T>>.loading() {
+        value = Resource.loading()
     }
 }

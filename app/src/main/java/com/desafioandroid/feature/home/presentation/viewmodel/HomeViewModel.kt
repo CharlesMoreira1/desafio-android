@@ -1,5 +1,6 @@
 package com.desafioandroid.feature.home.presentation.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.desafioandroid.core.base.BaseViewModel
@@ -10,18 +11,38 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
 
-    val getList = MutableLiveData<Resource<MutableList<Item>>>()
+    private val mutableLiveDataListItem = MutableLiveData<Resource<MutableList<Item>>>()
+    val totalItem: Int = 29
+    var currentPage = 2
+    var releasedLoad: Boolean = true
 
-    fun fetchList(page: Int = 1) {
+    val getListItem: LiveData<Resource<MutableList<Item>>> by lazy {
+        fetchListItem()
+        return@lazy mutableLiveDataListItem
+    }
+
+    private fun fetchListItem(page: Int = 1) {
+        mutableLiveDataListItem.loading()
         viewModelScope.launch {
-            getList.loading(true)
             try {
-                getList.success(repository.getList(page)?.let { it })
+                mutableLiveDataListItem.success(repository.getList(page)?.let { it })
             } catch (e: Exception) {
-                getList.error(e)
-            } finally {
-                getList.loading(false)
+                mutableLiveDataListItem.error(e)
             }
         }
+    }
+
+    fun nextPage() {
+        fetchListItem(currentPage++)
+        releasedLoad = false
+    }
+
+    fun backPreviousPage() {
+        fetchListItem(currentPage-1)
+    }
+
+    fun refreshViewModel() {
+        currentPage = 2
+        fetchListItem()
     }
 }

@@ -17,6 +17,7 @@ import com.desafioandroid.feature.pullrequest.presentation.viewmodel.PullRequest
 import kotlinx.android.synthetic.main.activity_pull_request.*
 import kotlinx.android.synthetic.main.layout_reload.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class PullRequestActivity : BaseActivity() {
 
@@ -25,7 +26,9 @@ class PullRequestActivity : BaseActivity() {
         private const val STATE_CLOSED = "closed"
     }
 
-    private val viewModel by viewModel<PullRequestViewModel>()
+    private val viewModel by viewModel<PullRequestViewModel> {
+        parametersOf(nameUser, nameRepository)
+    }
 
     private val pullRequestAdapter by lazy {
         PullRequestAdapter(pullRequestList){ pullRequestResponse ->
@@ -60,15 +63,14 @@ class PullRequestActivity : BaseActivity() {
     }
 
     private fun initViewModel() {
-        viewModel.fetchPullRequest(nameUser, nameRepository)
-        viewModel.getList.observeResource(this,
+        viewModel.getListPullRequest.observeResource(this,
             onSuccess = {
                 populateList(it)
                 populateStatePullRequest(it)
                 showSuccess()
             },
             onLoading = {
-                showLoading(it)
+                showLoading()
             },
             onError = {
                 showError()
@@ -110,7 +112,7 @@ class PullRequestActivity : BaseActivity() {
         stateOpen = 0
         stateClosed = 0
         pullRequestAdapter.clear(pullRequestList)
-        viewModel.fetchPullRequest(nameUser, nameRepository)
+        viewModel.refreshViewModel()
     }
 
     private fun swipeRefresh() {
@@ -126,17 +128,19 @@ class PullRequestActivity : BaseActivity() {
     private fun showSuccess() {
         recycler_pull_request.visibility = View.VISIBLE
         card_total_state.visibility = View.VISIBLE
+        include_layout_loading.visibility = View.GONE
         include_layout_reload.visibility = View.GONE
 
         showListEmpty()
     }
 
-    private fun showLoading(isVisibility: Boolean) {
-        include_layout_loading.visibility = if (isVisibility) View.VISIBLE else View.GONE
+    private fun showLoading() {
+        include_layout_loading.visibility = View.VISIBLE
     }
 
     private fun showError() {
         include_layout_reload.visibility = View.VISIBLE
+        include_layout_loading.visibility = View.GONE
         recycler_pull_request.visibility = View.GONE
         card_total_state.visibility = View.GONE
 

@@ -16,7 +16,8 @@ val repositoryModule = module {
 
 val viewModelModule = module {
     viewModel<HomeViewModel> { HomeViewModel(get()) }
-    viewModel<PullRequestViewModel> { PullRequestViewModel(get()) }
+    viewModel<PullRequestViewModel> { (userName: String, repositoryName: String) ->
+        PullRequestViewModel(userName, repositoryName, get()) }
 }
 
 val apiServiceClientModule = module {

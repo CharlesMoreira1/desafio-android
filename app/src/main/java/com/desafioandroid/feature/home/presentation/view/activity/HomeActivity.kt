@@ -25,7 +25,7 @@ class HomeActivity : BaseActivity() {
 
     private val homeAdapter by lazy {
         HomeAdapter(itemList) { item ->
-            if (releasedLoad) {
+            if (viewModel.releasedLoad) {
                 val intent = Intent(this@HomeActivity, PullRequestActivity::class.java)
                 intent.putExtra("name_user", item.owner.login)
                 intent.putExtra("name_repository", item.name)
@@ -35,9 +35,6 @@ class HomeActivity : BaseActivity() {
     }
 
     private val itemList = arrayListOf<Item>()
-    private val firstListItem: Int = 29
-    private var releasedLoad: Boolean = true
-    private var page: Int = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,14 +47,13 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun initViewModel() {
-        viewModel.fetchList()
-        viewModel.getList.observeResource(this,
+        viewModel.getListItem.observeResource(this,
             onSuccess = {
                 populateList(it)
                 showSuccess()
             },
             onLoading = {
-                showLoading(it)
+                showLoading()
             },
             onError = {
                 showError()
@@ -71,13 +67,12 @@ class HomeActivity : BaseActivity() {
             val linearLayoutManager = LinearLayoutManager(this@HomeActivity)
             this.addOnScrollListener(object : PaginationScroll(linearLayoutManager) {
                 override fun loadMoreItems() {
-                    viewModel.fetchList(page++)
+                    viewModel.nextPage()
                     include_layout_loading_bottom_scroll.visibility = View.VISIBLE
-                    releasedLoad = false
                 }
 
                 override fun isLoading(): Boolean {
-                    return releasedLoad
+                    return viewModel.releasedLoad
                 }
 
                 override fun hideMoreItems() {
@@ -93,19 +88,19 @@ class HomeActivity : BaseActivity() {
 
     private fun populateList(itemList: List<Item>) {
         this.itemList.addAll(itemList)
-        homeAdapter.notifyItemChanged(itemList.size - firstListItem, itemList.size)
+        homeAdapter.notifyItemChanged(itemList.size - viewModel.totalItem, itemList.size)
     }
 
     private fun clearListAndAdd() {
-        page = 2
+        viewModel.currentPage = 2
         homeAdapter.clear(itemList)
-        viewModel.fetchList()
+        viewModel.refreshViewModel()
     }
 
     private fun swipeRefresh() {
         swipe_refresh.setOnRefreshListener {
             Handler().postDelayed({
-                if (releasedLoad) {
+                if (viewModel.releasedLoad) {
                     clearListAndAdd()
                 }
                 swipe_refresh.isRefreshing = false
@@ -117,16 +112,18 @@ class HomeActivity : BaseActivity() {
         recycler_home.visibility = View.VISIBLE
         include_layout_loading_bottom_scroll.visibility = View.GONE
         include_layout_reload_bottom_scroll.visibility = View.GONE
+        include_layout_loading_full_screen.visibility = View.GONE
         include_layout_reload_full_screen.visibility = View.GONE
-        releasedLoad = true
+        viewModel.releasedLoad = true
     }
 
-    private fun showLoading(isVisibility: Boolean) {
-        include_layout_loading_full_screen.visibility = if (isVisibility) View.VISIBLE else View.GONE
+    private fun showLoading() {
+        include_layout_loading_full_screen.visibility = View.VISIBLE
     }
 
     private fun showError() {
-        if (page > 2) { errorBottomScroll() } else { errorFullScreen() }
+        if (viewModel.currentPage > 2) { errorBottomScroll() } else { errorFullScreen() }
+        include_layout_loading_full_screen.visibility = View.GONE
     }
 
     private fun errorFullScreen() {
@@ -150,7 +147,7 @@ class HomeActivity : BaseActivity() {
         showLoadingAndHideButtonRefreshBottomScroll(false)
 
         image_refresh_bottom_default.rotationAnimation().setOnClickListener {
-            viewModel.fetchList(page - 1)
+            viewModel.backPreviousPage()
 
             showLoadingAndHideButtonRefreshBottomScroll(true)
             include_layout_loading_full_screen.visibility = View.GONE

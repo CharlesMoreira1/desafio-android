@@ -1,5 +1,6 @@
 package com.desafioandroid.feature.pullrequest.presentation.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.desafioandroid.core.base.BaseViewModel
@@ -8,20 +9,29 @@ import com.desafioandroid.data.model.pullrequest.entity.PullRequestResponse
 import com.desafioandroid.feature.pullrequest.repository.PullRequestRepository
 import kotlinx.coroutines.launch
 
-class PullRequestViewModel(private val repository: PullRequestRepository) : BaseViewModel() {
+class PullRequestViewModel(private val userName: String, private val repositoryName: String,
+                           private val repository: PullRequestRepository) : BaseViewModel() {
 
-    val getList = MutableLiveData<Resource<List<PullRequestResponse>>>()
+    private val mutableLiveDataListPullRequest = MutableLiveData<Resource<List<PullRequestResponse>>>()
 
-    fun fetchPullRequest(userName: String, repositoryName: String) {
+    val getListPullRequest: LiveData<Resource<List<PullRequestResponse>>> by lazy {
+        fetchPullRequest()
+        return@lazy mutableLiveDataListPullRequest
+    }
+
+    private fun fetchPullRequest() {
         viewModelScope.launch {
-            getList.loading(true)
+            mutableLiveDataListPullRequest.loading()
             try {
-                getList.success(repository.getList(userName, repositoryName)?.let { it })
+                mutableLiveDataListPullRequest.success(repository.getList(userName, repositoryName)?.let { it })
             } catch (e: Exception) {
-                getList.error(e)
-            } finally {
-                getList.loading(false)
+                mutableLiveDataListPullRequest.error(e)
             }
         }
     }
+
+    fun refreshViewModel(){
+        fetchPullRequest()
+    }
 }
+
