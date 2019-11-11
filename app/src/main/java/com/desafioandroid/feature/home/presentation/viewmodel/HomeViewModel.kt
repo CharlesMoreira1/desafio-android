@@ -12,8 +12,8 @@ import kotlinx.coroutines.launch
 class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
 
     private val mutableLiveDataListItem = MutableLiveData<Resource<MutableList<Item>>>()
-    val totalItem: Int = 29
-    var currentPage = 2
+    private val itemList = mutableListOf<Item>()
+    var currentPage = 1
     var releasedLoad: Boolean = true
 
     val getListItem: LiveData<Resource<MutableList<Item>>> by lazy {
@@ -23,26 +23,29 @@ class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
 
     private fun fetchListItem(page: Int = 1) {
         mutableLiveDataListItem.loading()
+
         viewModelScope.launch {
             try {
-                mutableLiveDataListItem.success(repository.getList(page)?.let { it })
+                itemList.addAll(repository.getList(page)!!)
+                mutableLiveDataListItem.success(itemList)
             } catch (e: Exception) {
                 mutableLiveDataListItem.error(e)
             }
         }
     }
 
+
     fun nextPage() {
-        fetchListItem(currentPage++)
+        fetchListItem(++currentPage)
         releasedLoad = false
     }
 
     fun backPreviousPage() {
-        fetchListItem(currentPage-1)
+        fetchListItem(currentPage)
     }
 
     fun refreshViewModel() {
-        currentPage = 2
+        currentPage = 1
         fetchListItem()
     }
 }

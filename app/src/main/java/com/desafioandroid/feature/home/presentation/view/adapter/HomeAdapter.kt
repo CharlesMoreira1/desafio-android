@@ -12,11 +12,12 @@ import com.desafioandroid.R
 import com.desafioandroid.core.util.*
 import com.desafioandroid.data.model.home.entity.Item
 import kotlinx.android.synthetic.main.row_data_home.view.*
-import java.util.*
+import kotlin.collections.ArrayList
 
-class HomeAdapter(private var listItem: ArrayList<Item>,
-                  private val onItemClickListener: ((Item) -> Unit)) :
+class HomeAdapter(private val onItemClickListener: ((Item) -> Unit)) :
     RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
+
+    private var listItem = ArrayList<Item>()
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ItemViewHolder {
         val view = LayoutInflater.from(p0.context).inflate(R.layout.row_data_home, p0, false)
@@ -26,14 +27,19 @@ class HomeAdapter(private var listItem: ArrayList<Item>,
     override fun getItemCount(): Int = listItem.size
 
     override fun onBindViewHolder(holder: ItemViewHolder, p1: Int) {
-
         val dataItem = listItem[p1]
         holder.bindView(dataItem)
     }
 
-    fun clear(dataItem: ArrayList<Item>) {
-        listItem.clear()
-        listItem.addAll(dataItem)
+    fun addList(dataItem: List<Item>) {
+        val initPosition = this.listItem.size
+        this.listItem = dataItem as ArrayList<Item>
+
+        notifyItemRangeInserted(initPosition, this.listItem.size)
+    }
+
+    fun clearList(){
+        this.listItem.clear()
         notifyDataSetChanged()
     }
 

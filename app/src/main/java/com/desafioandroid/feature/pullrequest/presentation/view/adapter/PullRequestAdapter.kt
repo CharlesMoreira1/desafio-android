@@ -12,27 +12,33 @@ import com.desafioandroid.R
 import com.desafioandroid.core.util.*
 import com.desafioandroid.data.model.pullrequest.entity.PullRequestResponse
 import kotlinx.android.synthetic.main.row_data_pull_request.view.*
-import java.util.*
+import kotlin.collections.ArrayList
 
-class PullRequestAdapter(private var listPullRequestResponse: ArrayList<PullRequestResponse>, private val onItemClickListener: ((PullRequestResponse) -> Unit)) :
+class PullRequestAdapter(private val onItemClickListener: ((PullRequestResponse) -> Unit)) :
     RecyclerView.Adapter<PullRequestAdapter.ItemViewHolder>() {
+
+    private var listPullRequest = ArrayList<PullRequestResponse>()
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ItemViewHolder {
         val view = LayoutInflater.from(p0.context).inflate(R.layout.row_data_pull_request, p0, false)
         return ItemViewHolder(view, onItemClickListener)
     }
 
-    override fun getItemCount(): Int = listPullRequestResponse.size
+    override fun getItemCount(): Int = listPullRequest.size
 
     override fun onBindViewHolder(holder: ItemViewHolder, p1: Int) {
 
-        val dataItem = listPullRequestResponse[p1]
+        val dataItem = listPullRequest[p1]
         holder.bindView(dataItem)
     }
 
-    fun clear(listPullRequestResponse: ArrayList<PullRequestResponse>) {
-        this.listPullRequestResponse.clear()
-        this.listPullRequestResponse.addAll(listPullRequestResponse)
+    fun addList(listPullRequest: List<PullRequestResponse>) {
+        this.listPullRequest.addAll(listPullRequest)
+        notifyItemChanged(this.listPullRequest.size - listPullRequest.size, this.listPullRequest.size)
+    }
+
+    fun clearList() {
+        this.listPullRequest.clear()
         notifyDataSetChanged()
     }
 

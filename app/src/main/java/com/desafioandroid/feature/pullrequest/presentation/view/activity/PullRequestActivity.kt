@@ -31,12 +31,10 @@ class PullRequestActivity : BaseActivity() {
     }
 
     private val pullRequestAdapter by lazy {
-        PullRequestAdapter(pullRequestList){ pullRequestResponse ->
+        PullRequestAdapter { pullRequestResponse ->
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(pullRequestResponse.htmlUrl)))
         }
     }
-
-    private val pullRequestList = arrayListOf<PullRequestResponse>()
 
     private var nameUser: String = ""
     private var nameRepository: String = ""
@@ -89,8 +87,8 @@ class PullRequestActivity : BaseActivity() {
     }
 
     private fun populateList(pullRequestList: List<PullRequestResponse>) {
-        this.pullRequestList.addAll(pullRequestList)
-        pullRequestAdapter.notifyDataSetChanged()
+        pullRequestAdapter.addList(pullRequestList)
+        showListEmpty(pullRequestList)
     }
 
     private fun populateStatePullRequest(pullRequestList: List<PullRequestResponse>) {
@@ -108,17 +106,17 @@ class PullRequestActivity : BaseActivity() {
             .addColorSpecificText(this, R.color.colorOrange, stateOpenString)
     }
 
-    private fun clearListAndAdd() {
+    private fun refresh() {
         stateOpen = 0
         stateClosed = 0
-        pullRequestAdapter.clear(pullRequestList)
+        pullRequestAdapter.clearList()
         viewModel.refreshViewModel()
     }
 
     private fun swipeRefresh() {
         swipe_refresh.setOnRefreshListener {
             Handler().postDelayed({
-                clearListAndAdd()
+                refresh()
 
                 swipe_refresh.isRefreshing = false
             }, 1000)
@@ -130,8 +128,6 @@ class PullRequestActivity : BaseActivity() {
         card_total_state.visibility = View.VISIBLE
         include_layout_loading.visibility = View.GONE
         include_layout_reload.visibility = View.GONE
-
-        showListEmpty()
     }
 
     private fun showLoading() {
@@ -149,14 +145,14 @@ class PullRequestActivity : BaseActivity() {
         image_refresh_full_screen.setOnClickListener { view ->
             view.rotationAnimation()
 
-            clearListAndAdd()
+            refresh()
 
             showLoadingAndHideButtonRefresh(true)
             include_layout_loading.visibility = View.GONE
         }
     }
 
-    private fun showListEmpty() {
+    private fun showListEmpty(pullRequestList: List<PullRequestResponse>) {
         val listIsEmpty = pullRequestList.isEmpty()
         val listEmptyVisibilityVisible = if (listIsEmpty) View.VISIBLE else View.GONE
         val listEmptyVisibilityGone = if (listIsEmpty) View.GONE else View.VISIBLE

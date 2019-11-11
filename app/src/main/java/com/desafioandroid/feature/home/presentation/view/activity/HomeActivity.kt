@@ -24,7 +24,7 @@ class HomeActivity : BaseActivity() {
     private val viewModel by viewModel<HomeViewModel>()
 
     private val homeAdapter by lazy {
-        HomeAdapter(itemList) { item ->
+        HomeAdapter { item ->
             if (viewModel.releasedLoad) {
                 val intent = Intent(this@HomeActivity, PullRequestActivity::class.java)
                 intent.putExtra("name_user", item.owner.login)
@@ -33,8 +33,6 @@ class HomeActivity : BaseActivity() {
             }
         }
     }
-
-    private val itemList = arrayListOf<Item>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,13 +85,11 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun populateList(itemList: List<Item>) {
-        this.itemList.addAll(itemList)
-        homeAdapter.notifyItemChanged(itemList.size - viewModel.totalItem, itemList.size)
+        homeAdapter.addList(itemList)
     }
 
-    private fun clearListAndAdd() {
-        viewModel.currentPage = 2
-        homeAdapter.clear(itemList)
+    private fun refresh() {
+        homeAdapter.clearList()
         viewModel.refreshViewModel()
     }
 
@@ -101,7 +97,7 @@ class HomeActivity : BaseActivity() {
         swipe_refresh.setOnRefreshListener {
             Handler().postDelayed({
                 if (viewModel.releasedLoad) {
-                    clearListAndAdd()
+                    refresh()
                 }
                 swipe_refresh.isRefreshing = false
             }, 1000)
@@ -122,7 +118,7 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun showError() {
-        if (viewModel.currentPage > 2) { errorBottomScroll() } else { errorFullScreen() }
+        if (viewModel.currentPage > 1) { errorBottomScroll() } else { errorFullScreen() }
         include_layout_loading_full_screen.visibility = View.GONE
     }
 
@@ -136,7 +132,7 @@ class HomeActivity : BaseActivity() {
         image_refresh_full_screen.setOnClickListener { view ->
             view.rotationAnimation()
 
-            clearListAndAdd()
+            refresh()
 
             showLoadingAndHideButtonRefreshFullScreen(true)
             include_layout_loading_full_screen.visibility = View.GONE

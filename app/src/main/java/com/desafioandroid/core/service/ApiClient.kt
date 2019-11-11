@@ -36,7 +36,7 @@ class ApiClient {
     private val okHttpClient = OkHttpClient.Builder()
         .cache(Cache(context.cacheDir, cacheSize))
         .addInterceptor(loggingInterceptor)
-        .addNetworkInterceptor(networkCacheInterceptor)
+        //.addNetworkInterceptor(networkCacheInterceptor)
         .build()
 
 
