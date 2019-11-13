@@ -15,20 +15,39 @@ import kotlinx.android.synthetic.main.row_data_home.view.*
 import kotlin.collections.ArrayList
 
 class HomeAdapter(private val onItemClickListener: ((Item) -> Unit)) :
-    RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    companion object {
+        const val ITEM_LIST = 0
+        const val ITEM_BOTTOM = 1
+    }
 
     private var listItem = ArrayList<Item>()
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ItemViewHolder {
-        val view = LayoutInflater.from(p0.context).inflate(R.layout.row_data_home, p0, false)
-        return ItemViewHolder(view, onItemClickListener)
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): RecyclerView.ViewHolder {
+        return when(p1) {
+            ITEM_LIST -> ItemViewHolder(LayoutInflater.from(p0.context).inflate(R.layout.row_data_home, p0, false), onItemClickListener)
+
+            ITEM_BOTTOM -> ItemBottomViewHolder(LayoutInflater.from(p0.context).inflate(R.layout.layout_loading_bottom, p0, false))
+
+            else -> null!!
+        }
     }
 
-    override fun getItemCount(): Int = listItem.size
+    override fun getItemCount(): Int = listItem.size + 1
 
-    override fun onBindViewHolder(holder: ItemViewHolder, p1: Int) {
-        val dataItem = listItem[p1]
-        holder.bindView(dataItem)
+    override fun getItemViewType(position: Int): Int {
+        return if (position < listItem.size) ITEM_LIST else ITEM_BOTTOM
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, p1: Int) {
+        when(holder){
+            is ItemViewHolder -> {
+                val dataItem = listItem[p1]
+                holder.bindView(dataItem)
+            }
+            is ItemBottomViewHolder -> {}
+        }
     }
 
     fun addList(dataItem: List<Item>) {
@@ -79,4 +98,6 @@ class HomeAdapter(private val onItemClickListener: ((Item) -> Unit)) :
             }
         }
     }
+
+    class ItemBottomViewHolder(private val view: View): RecyclerView.ViewHolder(view)
 }

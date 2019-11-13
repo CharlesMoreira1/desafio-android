@@ -66,7 +66,6 @@ class HomeActivity : BaseActivity() {
             this.addOnScrollListener(object : PaginationScroll(linearLayoutManager) {
                 override fun loadMoreItems() {
                     viewModel.nextPage()
-                    include_layout_loading_bottom_scroll.visibility = View.VISIBLE
                 }
 
                 override fun isLoading(): Boolean {
@@ -106,8 +105,6 @@ class HomeActivity : BaseActivity() {
 
     private fun showSuccess() {
         recycler_home.visibility = View.VISIBLE
-        include_layout_loading_bottom_scroll.visibility = View.GONE
-        include_layout_reload_bottom_scroll.visibility = View.GONE
         include_layout_loading_full_screen.visibility = View.GONE
         include_layout_reload_full_screen.visibility = View.GONE
         viewModel.releasedLoad = true
@@ -124,7 +121,6 @@ class HomeActivity : BaseActivity() {
 
     private fun errorFullScreen() {
         include_layout_reload_full_screen.visibility = View.VISIBLE
-        include_layout_loading_bottom_scroll.visibility = View.GONE
         recycler_home.visibility = View.GONE
 
         showLoadingAndHideButtonRefreshFullScreen(false)
@@ -156,7 +152,5 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun showLoadingAndHideButtonRefreshBottomScroll(isVisibility: Boolean) {
-        include_layout_loading_bottom_scroll.visibility = if (isVisibility) View.VISIBLE else View.GONE
-        include_layout_reload_bottom_scroll.visibility = if (isVisibility) View.GONE else View.VISIBLE
     }
 }
