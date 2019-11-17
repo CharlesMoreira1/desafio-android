@@ -10,11 +10,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.desafioandroid.R
 import com.desafioandroid.core.util.*
+import com.desafioandroid.core.customview.ItemReload
 import com.desafioandroid.data.model.home.entity.Item
+import kotlinx.android.synthetic.main.layout_item_bottom.view.*
 import kotlinx.android.synthetic.main.row_data_home.view.*
 import kotlin.collections.ArrayList
 
-class HomeAdapter(private val onItemClickListener: ((Item) -> Unit)) :
+class HomeAdapter(private val onItemClickListener: ((Item) -> Unit), private val onRetryClickListener: (() -> Unit)) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -23,30 +25,38 @@ class HomeAdapter(private val onItemClickListener: ((Item) -> Unit)) :
     }
 
     private var listItem = ArrayList<Item>()
+    private var isLoadingAdded = false
+    private var retryPageLoad = false
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): RecyclerView.ViewHolder {
-        return when(p1) {
-            ITEM_LIST -> ItemViewHolder(LayoutInflater.from(p0.context).inflate(R.layout.row_data_home, p0, false), onItemClickListener)
-
-            ITEM_BOTTOM -> ItemBottomViewHolder(LayoutInflater.from(p0.context).inflate(R.layout.layout_loading_bottom, p0, false))
-
-            else -> null!!
+        return if (p1 == ITEM_LIST) {
+            ItemViewHolder(LayoutInflater.from(p0.context).inflate(R.layout.row_data_home, p0, false), onItemClickListener)
+        } else {
+            ItemBottomViewHolder(LayoutInflater.from(p0.context).inflate(R.layout.layout_item_bottom, p0, false), onRetryClickListener)
         }
     }
 
-    override fun getItemCount(): Int = listItem.size + 1
+    override fun getItemCount(): Int {
+        return if (isLoadingAdded) {
+            listItem.size + 1
+        } else {
+            listItem.size
+        }
+    }
 
     override fun getItemViewType(position: Int): Int {
         return if (position < listItem.size) ITEM_LIST else ITEM_BOTTOM
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, p1: Int) {
-        when(holder){
+        when (holder) {
             is ItemViewHolder -> {
                 val dataItem = listItem[p1]
                 holder.bindView(dataItem)
             }
-            is ItemBottomViewHolder -> {}
+            is ItemBottomViewHolder -> {
+                holder.bindView(retryPageLoad)
+            }
         }
     }
 
@@ -55,14 +65,30 @@ class HomeAdapter(private val onItemClickListener: ((Item) -> Unit)) :
         this.listItem = dataItem as ArrayList<Item>
 
         notifyItemRangeInserted(initPosition, this.listItem.size)
+        addItemBottom()
     }
 
-    fun clearList(){
+    fun clearList() {
+        isLoadingAdded = false
         this.listItem.clear()
         notifyDataSetChanged()
     }
 
-    class ItemViewHolder(private val view: View, private val onItemClickListener: ((Item) -> Unit)):
+    fun addItemBottom() {
+        isLoadingAdded = true
+    }
+
+    fun removeItemBottom() {
+        isLoadingAdded = false
+        notifyItemRangeRemoved(this.listItem.size, 1)
+    }
+
+    fun showErrorRetry(showError: Boolean) {
+        retryPageLoad = showError
+        notifyItemChanged(this.listItem.size, 1)
+    }
+
+    class ItemViewHolder(private val view: View, private val onItemClickListener: ((Item) -> Unit)) :
         RecyclerView.ViewHolder(view) {
 
         private val nameRepository: TextView = view.text_name_repository
@@ -99,5 +125,21 @@ class HomeAdapter(private val onItemClickListener: ((Item) -> Unit)) :
         }
     }
 
-    class ItemBottomViewHolder(private val view: View): RecyclerView.ViewHolder(view)
+    class ItemBottomViewHolder(private val view: View, private val onRetryClickListener: (() -> Unit)) :
+        RecyclerView.ViewHolder(view) {
+
+        private val itemBottom: ItemReload = view.item_bottom
+
+        fun bindView(retryPageLoad: Boolean) = with(view) {
+            if (retryPageLoad) {
+                itemBottom.showErrorRetry()
+            } else {
+                itemBottom.showLoading()
+            }
+
+            itemBottom.buttonRetry.setOnClickListener {
+                onRetryClickListener.invoke()
+            }
+        }
+    }
 }

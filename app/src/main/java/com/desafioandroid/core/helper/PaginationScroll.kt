@@ -11,16 +11,22 @@ abstract class PaginationScroll(private val layoutManager: LinearLayoutManager) 
             val visibleItemCount = layoutManager.childCount
             val totalItemCount = layoutManager.itemCount
             val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-            if (isLoading()) {
-                if (visibleItemCount + firstVisibleItemPosition >= totalItemCount) {
+
+            if (isLoading() && !isLastPage()) {
+                if (visibleItemCount + firstVisibleItemPosition >= totalItemCount
+                    && firstVisibleItemPosition >= 0
+                    && totalItemCount >= getTotalPageCount()
+                ) {
                     loadMoreItems()
                 }
-                hideMoreItems()
             }
+            hideOthersItems()
         }
     }
 
     abstract fun loadMoreItems()
+    abstract fun getTotalPageCount(): Int
     abstract fun isLoading(): Boolean
-    abstract fun hideMoreItems()
+    abstract fun isLastPage(): Boolean
+    abstract fun hideOthersItems()
 }

@@ -14,30 +14,35 @@ class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
     private val mutableLiveDataListItem = MutableLiveData<Resource<MutableList<Item>>>()
     private val itemList = mutableListOf<Item>()
     var currentPage = 1
-    var releasedLoad: Boolean = true
+    var isLoading = true
+    var isLastPage = false
 
-    val getListItem: LiveData<Resource<MutableList<Item>>> by lazy {
+    init {
         fetchListItem()
-        return@lazy mutableLiveDataListItem
     }
+
+    fun getListItem(): LiveData<Resource<MutableList<Item>>> = mutableLiveDataListItem
 
     private fun fetchListItem(page: Int = 1) {
         mutableLiveDataListItem.loading()
 
         viewModelScope.launch {
             try {
-                itemList.addAll(repository.getList(page)!!)
-                mutableLiveDataListItem.success(itemList)
-            } catch (e: Exception) {
-                mutableLiveDataListItem.error(e)
+                repository.getList(page)?.let {
+                    itemList.addAll(it)
+                    if (itemList.isNotEmpty()) {
+                        mutableLiveDataListItem.success(itemList)
+                    }
+                }
+            } catch (t: Throwable){
+                mutableLiveDataListItem.error(t)
             }
         }
     }
 
-
     fun nextPage() {
         fetchListItem(++currentPage)
-        releasedLoad = false
+        isLoading = false
     }
 
     fun backPreviousPage() {
@@ -46,6 +51,12 @@ class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
 
     fun refreshViewModel() {
         currentPage = 1
+        isLastPage = false
         fetchListItem()
+    }
+
+    fun paginationFinished(){
+        isLoading = true
+        isLastPage = true
     }
 }

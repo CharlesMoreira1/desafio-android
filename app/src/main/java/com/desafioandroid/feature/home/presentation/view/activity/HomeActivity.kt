@@ -16,22 +16,25 @@ import com.desafioandroid.feature.home.presentation.viewmodel.HomeViewModel
 import com.desafioandroid.feature.pullrequest.presentation.view.activity.PullRequestActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.layout_reload.*
-import kotlinx.android.synthetic.main.layout_reload_bottom.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import retrofit2.HttpException
 
 class HomeActivity : BaseActivity() {
 
     private val viewModel by viewModel<HomeViewModel>()
 
     private val homeAdapter by lazy {
-        HomeAdapter { item ->
-            if (viewModel.releasedLoad) {
+        HomeAdapter(
+            onItemClickListener = { item ->
                 val intent = Intent(this@HomeActivity, PullRequestActivity::class.java)
                 intent.putExtra("name_user", item.owner.login)
                 intent.putExtra("name_repository", item.name)
                 startActivity(intent)
-            }
-        }
+            },
+            onRetryClickListener = {
+                errorBottomScroll(false)
+                viewModel.backPreviousPage()
+            })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,16 +48,18 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun initViewModel() {
-        viewModel.getListItem.observeResource(this,
+        viewModel.getListItem().observeResource(this,
             onSuccess = {
                 populateList(it)
                 showSuccess()
             },
             onLoading = {
-                showLoading()
+                if (viewModel.isLoading) {
+                    showLoading()
+                }
             },
             onError = {
-                showError()
+                showError(it)
             }
         )
     }
@@ -69,10 +74,18 @@ class HomeActivity : BaseActivity() {
                 }
 
                 override fun isLoading(): Boolean {
-                    return viewModel.releasedLoad
+                    return viewModel.isLoading
                 }
 
-                override fun hideMoreItems() {
+                override fun getTotalPageCount(): Int {
+                    return 0
+                }
+
+                override fun isLastPage(): Boolean {
+                    return viewModel.isLastPage
+                }
+
+                override fun hideOthersItems() {
                     include_layout_loading_full_screen.visibility = View.GONE
                 }
             })
@@ -95,9 +108,7 @@ class HomeActivity : BaseActivity() {
     private fun swipeRefresh() {
         swipe_refresh.setOnRefreshListener {
             Handler().postDelayed({
-                if (viewModel.releasedLoad) {
-                    refresh()
-                }
+                refresh()
                 swipe_refresh.isRefreshing = false
             }, 1000)
         }
@@ -107,50 +118,55 @@ class HomeActivity : BaseActivity() {
         recycler_home.visibility = View.VISIBLE
         include_layout_loading_full_screen.visibility = View.GONE
         include_layout_reload_full_screen.visibility = View.GONE
-        viewModel.releasedLoad = true
+        viewModel.isLoading = true
     }
 
     private fun showLoading() {
         include_layout_loading_full_screen.visibility = View.VISIBLE
     }
 
-    private fun showError() {
-        if (viewModel.currentPage > 1) { errorBottomScroll() } else { errorFullScreen() }
-        include_layout_loading_full_screen.visibility = View.GONE
+    private fun showError(t: Throwable){
+        when(t){
+            is HttpException -> {
+                if (t.code() == 422){
+                    paginationFinished()
+                }
+            }
+            is Exception -> {
+                if (viewModel.currentPage > 1) {
+                    errorBottomScroll(true)
+                } else {
+                    errorFullScreen()
+                }
+            }
+        }
     }
 
     private fun errorFullScreen() {
-        include_layout_reload_full_screen.visibility = View.VISIBLE
-        recycler_home.visibility = View.GONE
-
         showLoadingAndHideButtonRefreshFullScreen(false)
 
-        image_refresh_full_screen.setOnClickListener { view ->
+        item_bottom.buttonRetry.setOnClickListener { view ->
             view.rotationAnimation()
 
             refresh()
-
             showLoadingAndHideButtonRefreshFullScreen(true)
-            include_layout_loading_full_screen.visibility = View.GONE
         }
     }
 
-    private fun errorBottomScroll() {
-        showLoadingAndHideButtonRefreshBottomScroll(false)
-
-        image_refresh_bottom_default.rotationAnimation().setOnClickListener {
-            viewModel.backPreviousPage()
-
-            showLoadingAndHideButtonRefreshBottomScroll(true)
-            include_layout_loading_full_screen.visibility = View.GONE
-        }
+    private fun errorBottomScroll(showError: Boolean) {
+        homeAdapter.showErrorRetry(showError)
     }
 
     private fun showLoadingAndHideButtonRefreshFullScreen(isVisibility: Boolean) {
-        progress_loading_full_screen.visibility = if (isVisibility) View.VISIBLE else View.GONE
-        image_refresh_full_screen.visibility = if (isVisibility) View.GONE else View.VISIBLE
+        include_layout_reload_full_screen.visibility = View.VISIBLE
+        include_layout_loading_full_screen.visibility = View.GONE
+        recycler_home.visibility = View.GONE
+
+        if (isVisibility) item_bottom.showLoading() else item_bottom.showErrorRetry()
     }
 
-    private fun showLoadingAndHideButtonRefreshBottomScroll(isVisibility: Boolean) {
+    private fun paginationFinished() {
+        viewModel.paginationFinished()
+        homeAdapter.removeItemBottom()
     }
 }

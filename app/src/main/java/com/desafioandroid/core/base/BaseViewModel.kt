@@ -10,8 +10,8 @@ abstract class BaseViewModel : ViewModel() {
         value = Resource.success(data)
     }
 
-    protected fun <T> MutableLiveData<Resource<T>>.error(e: Exception?) {
-        value = Resource.error(e)
+    protected fun <T> MutableLiveData<Resource<T>>.error(t: Throwable?) {
+        value = Resource.error(t)
     }
 
     protected fun <T> MutableLiveData<Resource<T>>.loading() {

@@ -14,10 +14,11 @@ class PullRequestViewModel(private val userName: String, private val repositoryN
 
     private val mutableLiveDataListPullRequest = MutableLiveData<Resource<List<PullRequestResponse>>>()
 
-    val getListPullRequest: LiveData<Resource<List<PullRequestResponse>>> by lazy {
+    init {
         fetchPullRequest()
-        return@lazy mutableLiveDataListPullRequest
     }
+
+    fun getListPullRequest(): LiveData<Resource<List<PullRequestResponse>>> = mutableLiveDataListPullRequest
 
     private fun fetchPullRequest() {
         viewModelScope.launch {

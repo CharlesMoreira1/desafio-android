@@ -3,9 +3,8 @@ package com.desafioandroid.core.helper
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import java.lang.Exception
 
-data class Resource<out T>(val status: Status, val data: T?, val exception: Exception?) {
+data class Resource<out T>(val status: Status, val data: T?, val throwable: Throwable?) {
 
     enum class Status { SUCCESS, ERROR, LOADING }
 
@@ -14,8 +13,8 @@ data class Resource<out T>(val status: Status, val data: T?, val exception: Exce
             return Resource(Status.SUCCESS, data, null)
         }
 
-        fun <T> error(exception: Exception?): Resource<T> {
-            return Resource(Status.ERROR, null, exception)
+        fun <T> error(throwable: Throwable?): Resource<T> {
+            return Resource(Status.ERROR, null, throwable)
         }
 
         fun <T> loading(): Resource<T> {
@@ -27,7 +26,7 @@ data class Resource<out T>(val status: Status, val data: T?, val exception: Exce
 fun <T> LiveData<Resource<T>>.observeResource(
     owner: LifecycleOwner,
     onSuccess: (T) -> Unit,
-    onError: (Exception) -> Unit,
+    onError: (Throwable) -> Unit,
     onLoading: () -> Unit) {
 
     observe(owner, Observer { resource ->
@@ -38,7 +37,7 @@ fun <T> LiveData<Resource<T>>.observeResource(
                 }
             }
             Resource.Status.ERROR -> {
-                resource.exception?.let {
+                resource.throwable?.let {
                     onError.invoke(it)
                 }
             }

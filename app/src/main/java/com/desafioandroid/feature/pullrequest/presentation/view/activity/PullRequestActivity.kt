@@ -61,7 +61,7 @@ class PullRequestActivity : BaseActivity() {
     }
 
     private fun initViewModel() {
-        viewModel.getListPullRequest.observeResource(this,
+        viewModel.getListPullRequest().observeResource(this,
             onSuccess = {
                 populateList(it)
                 populateStatePullRequest(it)
@@ -142,7 +142,7 @@ class PullRequestActivity : BaseActivity() {
 
         showLoadingAndHideButtonRefresh(false)
 
-        image_refresh_full_screen.setOnClickListener { view ->
+        item_bottom.buttonRetry.setOnClickListener { view ->
             view.rotationAnimation()
 
             refresh()
@@ -163,7 +163,6 @@ class PullRequestActivity : BaseActivity() {
     }
 
     private fun showLoadingAndHideButtonRefresh(isVisibility: Boolean) {
-        progress_loading_full_screen.visibility = if (isVisibility) View.VISIBLE else View.GONE
-        image_refresh_full_screen.visibility = if (isVisibility) View.GONE else View.VISIBLE
+        if (isVisibility) item_bottom.showLoading() else item_bottom.showErrorRetry()
     }
 }
