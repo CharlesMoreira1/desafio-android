@@ -1,6 +1,5 @@
 package com.desafioandroid.core.service
 
-import com.desafioandroid.BuildConfig
 import com.desafioandroid.MyApplication.Companion.applicationContext
 import com.desafioandroid.data.source.remote.ApiService
 import okhttp3.Cache
@@ -13,6 +12,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 class ApiClient {
+
+    companion object {
+        var BASER_URL = "https://api.github.com/"
+    }
 
     private val cacheSize = (10 * 1024 * 1024).toLong()
     private val context = applicationContext()
@@ -41,7 +44,7 @@ class ApiClient {
 
 
     private val getRetrofitInstance = Retrofit.Builder()
-        .baseUrl(BuildConfig.BASE_API)
+        .baseUrl(BASER_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .client(okHttpClient)
         .build()

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.desafioandroid.BuildConfig
 import com.desafioandroid.R
 import com.desafioandroid.core.base.BaseActivity
 import com.desafioandroid.core.helper.PaginationScroll
@@ -13,7 +14,6 @@ import com.desafioandroid.core.util.rotationAnimation
 import com.desafioandroid.data.model.home.entity.Item
 import com.desafioandroid.feature.home.presentation.view.adapter.HomeAdapter
 import com.desafioandroid.feature.home.presentation.viewmodel.HomeViewModel
-import com.desafioandroid.feature.pullrequest.presentation.view.activity.PullRequestActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.layout_reload.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -26,7 +26,9 @@ class HomeActivity : BaseActivity() {
     private val homeAdapter by lazy {
         HomeAdapter(
             onItemClickListener = { item ->
-                val intent = Intent(this@HomeActivity, PullRequestActivity::class.java)
+                var intent = Intent()
+                intent = intent.setClassName(BuildConfig.APPLICATION_ID,
+                    "com.concrete.pullrequest.presentation.view.activity.PullRequestActivity")
                 intent.putExtra("name_user", item.owner.login)
                 intent.putExtra("name_repository", item.name)
                 startActivity(intent)

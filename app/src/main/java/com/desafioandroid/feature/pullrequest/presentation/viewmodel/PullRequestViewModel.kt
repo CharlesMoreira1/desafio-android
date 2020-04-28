@@ -10,7 +10,8 @@ import com.desafioandroid.feature.pullrequest.repository.PullRequestRepository
 import kotlinx.coroutines.launch
 
 class PullRequestViewModel(private val userName: String, private val repositoryName: String,
-                           private val repository: PullRequestRepository) : BaseViewModel() {
+                           private val repository: PullRequestRepository
+) : BaseViewModel() {
 
     private val mutableLiveDataListPullRequest = MutableLiveData<Resource<List<PullRequestResponse>>>()
 

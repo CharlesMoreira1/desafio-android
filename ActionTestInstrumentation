@@ -1,0 +1,4 @@
+#Comando para executar teste instrumentado para dynamic feature
+(exec ./gradlew pullrequest:connectedAndroidTest --stacktrace \
+-Pandroid.testInstrumentationRunnerArguments.class=\
+com.concrete.pullrequest.presentation.view.MainActivityTest)

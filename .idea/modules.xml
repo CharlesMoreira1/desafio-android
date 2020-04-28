@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Desafio Android.iml" filepath="$PROJECT_DIR$/Desafio Android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Desafio Android.iml" filepath="$PROJECT_DIR$/Desafio Android.iml" group="Desafio Android" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="Desafio Android/app" />
+      <module fileurl="file://$PROJECT_DIR$/pullrequest/pullrequest.iml" filepath="$PROJECT_DIR$/pullrequest/pullrequest.iml" group="Desafio Android/pullrequest" />
     </modules>
   </component>
 </project>
