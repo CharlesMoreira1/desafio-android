@@ -2,61 +2,32 @@ package com.desafioandroid.feature.home.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations.switchMap
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagedList
 import com.desafioandroid.core.base.BaseViewModel
 import com.desafioandroid.core.helper.Resource
+import com.desafioandroid.core.util.Listing
+import com.desafioandroid.core.util.fetchData
+import com.desafioandroid.core.util.refresh
+import com.desafioandroid.core.util.retry
 import com.desafioandroid.data.model.home.entity.Item
 import com.desafioandroid.feature.home.repository.HomeRepository
-import kotlinx.coroutines.launch
 
-class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
-
-    private val mutableLiveDataListItem = MutableLiveData<Resource<MutableList<Item>>>()
-    private val itemList = mutableListOf<Item>()
-    var currentPage = 1
-    var isLoading = true
-    var isLastPage = false
+class HomeViewModel(repository: HomeRepository) : BaseViewModel() {
+    private val mutableLiveDataListingItem = MutableLiveData<Listing<Item>>()
+    val getLiveDataItem: LiveData<PagedList<Item>> = switchMap(mutableLiveDataListingItem){ it.pagedList }
+    val getNetworkState: LiveData<Resource<Any>> = switchMap(mutableLiveDataListingItem){ it.networkState }
 
     init {
-        fetchListItem()
+        mutableLiveDataListingItem.fetchData(repository.getPagedItem(viewModelScope))
     }
 
-    fun getListItem(): LiveData<Resource<MutableList<Item>>> = mutableLiveDataListItem
-
-    private fun fetchListItem(page: Int = 1) {
-        mutableLiveDataListItem.loading()
-
-        viewModelScope.launch {
-            try {
-                repository.getList(page)?.let {
-                    itemList.addAll(it)
-                    if (itemList.isNotEmpty()) {
-                        mutableLiveDataListItem.success(itemList)
-                    }
-                }
-            } catch (t: Throwable){
-                mutableLiveDataListItem.error(t)
-            }
-        }
+    fun refresh() {
+        mutableLiveDataListingItem.refresh()
     }
 
-    fun nextPage() {
-        fetchListItem(++currentPage)
-        isLoading = false
-    }
-
-    fun backPreviousPage() {
-        fetchListItem(currentPage)
-    }
-
-    fun refreshViewModel() {
-        currentPage = 1
-        isLastPage = false
-        fetchListItem()
-    }
-
-    fun paginationFinished(){
-        isLoading = true
-        isLastPage = true
+    fun retry() {
+        mutableLiveDataListingItem.retry()
     }
 }
