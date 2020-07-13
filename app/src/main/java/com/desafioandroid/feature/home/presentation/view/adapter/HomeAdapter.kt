@@ -11,21 +11,62 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.desafioandroid.R
+import com.desafioandroid.core.customview.ItemReload
+import com.desafioandroid.core.helper.Resource
 import com.desafioandroid.core.util.dateFormat
 import com.desafioandroid.core.util.decimalFormat
 import com.desafioandroid.core.util.fadeAnimation
 import com.desafioandroid.data.model.home.entity.Item
-import com.desafioandroid.feature.home.presentation.view.adapter.HomeAdapter.ItemViewHolder
+import kotlinx.android.synthetic.main.layout_item_bottom.view.*
 import kotlinx.android.synthetic.main.row_data_home.view.*
 
-class HomeAdapter : PagedListAdapter<Item, ItemViewHolder>(DIFF_CALLBACK) {
+class HomeAdapter : PagedListAdapter<Item, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        return ItemViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_data_home, parent, false))
+    private var status: Resource.Status? = null
+    private var isLoading = false
+
+    var onRetryClickListener: () -> Unit = {}
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return if (viewType == ITEM_LIST) {
+            ItemViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_data_home, parent, false))
+        } else {
+            ItemBottomViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.layout_item_bottom, parent, false))
+        }
     }
 
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        getItem(position)?.let { holder.bindView(it) }
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when(getItemViewType(position)) {
+            ITEM_LIST -> {
+                val newHolder = holder as ItemViewHolder
+                getItem(position)?.let { newHolder.bindView(it) }
+            }
+            ITEM_BOTTOM -> {
+                val newHolder = holder as ItemBottomViewHolder
+                newHolder.bindView()
+            }
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return if (isLoading) {
+            super.getItemCount() + 1
+        } else {
+            super.getItemCount()
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (isLoading && (position == itemCount-1)) ITEM_BOTTOM else ITEM_LIST
+    }
+
+    fun setStatus(status: Resource.Status) {
+        this.status = status
+        if (status == Resource.Status.LOADING_PAGINATION) {
+            isLoading = true
+        } else if (status == Resource.Status.END_LIST) {
+            isLoading = false
+        }
     }
 
     inner class ItemViewHolder(private val view: View) :
@@ -61,7 +102,28 @@ class HomeAdapter : PagedListAdapter<Item, ItemViewHolder>(DIFF_CALLBACK) {
         }
     }
 
+    inner class ItemBottomViewHolder(private val view: View) :
+        RecyclerView.ViewHolder(view) {
+
+        private val itemBottom: ItemReload = view.item_bottom
+
+        fun bindView() = with(view) {
+            if (status == Resource.Status.ERROR_PAGINATION) {
+                itemBottom.showErrorRetry()
+
+                itemBottom.buttonRetry.setOnClickListener {
+                    onRetryClickListener.invoke()
+                }
+            } else {
+                itemBottom.showLoading()
+            }
+        }
+    }
+
     companion object {
+        const val ITEM_LIST = 0
+        const val ITEM_BOTTOM = 1
+
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Item>() {
             override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
                 return oldItem.id == newItem.id

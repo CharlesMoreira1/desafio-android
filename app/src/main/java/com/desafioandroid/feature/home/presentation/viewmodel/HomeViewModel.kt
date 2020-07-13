@@ -17,7 +17,7 @@ import com.desafioandroid.feature.home.repository.HomeRepository
 class HomeViewModel(repository: HomeRepository) : BaseViewModel() {
     private val mutableLiveDataListingItem = MutableLiveData<Listing<Item>>()
     val getLiveDataItem: LiveData<PagedList<Item>> = switchMap(mutableLiveDataListingItem){ it.pagedList }
-    val getNetworkState: LiveData<Resource<Any>> = switchMap(mutableLiveDataListingItem){ it.networkState }
+    val getNetworkState: LiveData<Resource.Status> = switchMap(mutableLiveDataListingItem){ it.networkState }
 
     init {
         mutableLiveDataListingItem.fetchData(repository.getPagedItem(viewModelScope))

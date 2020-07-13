@@ -6,11 +6,10 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.desafioandroid.R
 import com.desafioandroid.core.base.BaseActivity
-import com.desafioandroid.core.helper.observeResource
+import com.desafioandroid.core.helper.Resource
 import com.desafioandroid.core.util.rotationAnimation
 import com.desafioandroid.feature.home.presentation.view.adapter.HomeAdapter
 import com.desafioandroid.feature.home.presentation.viewmodel.HomeViewModel
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.layout_reload.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -39,26 +38,25 @@ class HomeActivity : BaseActivity() {
             swipe_refresh.isRefreshing = false
         })
 
-        viewModel.getNetworkState.observeResource(this,
-            onSuccess = {
-                showSuccess()
-            },
-            onLoading = {
-                showLoading()
-            },
-            onLoadingPagination = {
-                Snackbar.make(constraint_home, "Carregando...", Snackbar.LENGTH_LONG).show()
-            },
-            onError = {
-                showError()
-            },
-            onErrorPagination = {
-                Snackbar.make(constraint_home, "Deu error", Snackbar.LENGTH_INDEFINITE)
-                    .setAction("Tentar de novo") {
+        viewModel.getNetworkState.observe(this, Observer {
+            when (it) {
+                Resource.Status.SUCCESS -> {
+                    showSuccess()
+                }
+                Resource.Status.ERROR -> {
+                    showError()
+                }
+                Resource.Status.LOADING -> {
+                    showLoading()
+                }
+                else -> {
+                    homeAdapter.setStatus(it)
+                    homeAdapter.onRetryClickListener = {
                         viewModel.retry()
-                    }.show()
+                    }
+                }
             }
-        )
+        })
     }
 
     private fun iniUi() {
@@ -68,6 +66,7 @@ class HomeActivity : BaseActivity() {
             this.layoutManager = linearLayoutManager
         }
         swipeRefresh()
+
     }
 
     private fun showSuccess() {

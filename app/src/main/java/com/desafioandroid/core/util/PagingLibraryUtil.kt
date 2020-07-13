@@ -7,7 +7,7 @@ import com.desafioandroid.core.helper.Resource
 
 data class Listing<T>(
     val pagedList: LiveData<PagedList<T>>,
-    val networkState: LiveData<Resource<Any>>,
+    val networkState: LiveData<Resource.Status>,
     val refresh: () -> Unit,
     val retry: () -> Unit
 )
