@@ -22,9 +22,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/core/customview/ItemReload.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/core/customview/ItemReload.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/core/helper/Resource.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/core/helper/Resource.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/core/util/PagingLibraryUtil.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/core/util/PagingLibraryUtil.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/feature/home/presentation/view/activity/HomeActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/feature/home/presentation/view/activity/HomeActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/feature/home/presentation/view/adapter/HomeAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/feature/home/presentation/view/adapter/HomeAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/feature/home/presentation/viewmodel/HomeViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/feature/home/presentation/viewmodel/HomeViewModel.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/feature/home/repository/HomeDataSource.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/feature/home/repository/HomeDataSource.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -269,7 +271,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594673354863</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary=":zap: Adicionado loading bottom no adapter.">
+      <created>1594773681478</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1594773681478</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -300,9 +309,10 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2660" y="237" width="429" height="571" key="#com.intellij.ide.util.MemberChooser/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594511066309" />
-    <state x="2613" y="268" width="524" height="510" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1594579302916">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="693" y="258" width="524" height="510" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1594774397882">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="693" y="258" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594774397882" />
     <state x="2613" y="268" width="524" height="510" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594579302916" />
     <state x="715" y="223" key="#xdebugger.evaluate" timestamp="1594671082693">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -313,64 +323,64 @@
     </state>
     <state x="817" y="275" key="AndroidProcessChooserDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594772677180" />
     <state x="2737" y="286" width="286" height="473" key="AndroidProcessChooserDialog/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594576626084" />
-    <state x="201" y="102" width="1508" height="833" key="CommitChangelistDialog2" timestamp="1594673477649">
+    <state x="201" y="102" width="1508" height="833" key="CommitChangelistDialog2" timestamp="1594773717849">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="201" y="102" key="CommitChangelistDialog2/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594673477649" />
+    <state x="201" y="102" key="CommitChangelistDialog2/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594773717849" />
     <state x="2121" y="106" width="1508" height="833" key="CommitChangelistDialog2/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594594177861" />
-    <state x="259" y="227" width="1414" height="705" key="DiffContextDialog" timestamp="1594770961621">
+    <state x="259" y="227" width="1414" height="705" key="DiffContextDialog" timestamp="1594775329304">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="259" y="227" width="1414" height="705" key="DiffContextDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594770961621" />
+    <state x="259" y="227" width="1414" height="705" key="DiffContextDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594775329304" />
     <state x="2020" y="127" width="1720" height="783" key="DiffContextDialog/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594592712592" />
-    <state width="1875" height="597" key="GridCell.Tab.0.bottom" timestamp="1594773578235">
+    <state width="1875" height="346" key="GridCell.Tab.0.bottom" timestamp="1594773736005">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="597" key="GridCell.Tab.0.bottom/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594773578235" />
+    <state width="1875" height="346" key="GridCell.Tab.0.bottom/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594773736005" />
     <state width="1878" height="452" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594594049102" />
-    <state width="1875" height="597" key="GridCell.Tab.0.center" timestamp="1594773578235">
+    <state width="1875" height="346" key="GridCell.Tab.0.center" timestamp="1594773736005">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="597" key="GridCell.Tab.0.center/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594773578235" />
+    <state width="1875" height="346" key="GridCell.Tab.0.center/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594773736005" />
     <state width="1878" height="452" key="GridCell.Tab.0.center/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594594049102" />
-    <state width="1875" height="597" key="GridCell.Tab.0.left" timestamp="1594773578235">
+    <state width="1875" height="346" key="GridCell.Tab.0.left" timestamp="1594773736005">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="597" key="GridCell.Tab.0.left/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594773578235" />
+    <state width="1875" height="346" key="GridCell.Tab.0.left/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594773736005" />
     <state width="1878" height="452" key="GridCell.Tab.0.left/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594594049102" />
-    <state width="1875" height="597" key="GridCell.Tab.0.right" timestamp="1594773578235">
+    <state width="1875" height="346" key="GridCell.Tab.0.right" timestamp="1594773736005">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="597" key="GridCell.Tab.0.right/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594773578235" />
+    <state width="1875" height="346" key="GridCell.Tab.0.right/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594773736005" />
     <state width="1878" height="452" key="GridCell.Tab.0.right/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594594049102" />
-    <state width="1875" height="346" key="GridCell.Tab.1.bottom" timestamp="1594772977541">
+    <state width="1875" height="346" key="GridCell.Tab.1.bottom" timestamp="1594773736005">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="346" key="GridCell.Tab.1.bottom/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594772977541" />
+    <state width="1875" height="346" key="GridCell.Tab.1.bottom/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594773736005" />
     <state width="1878" height="313" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594578219121" />
-    <state width="1875" height="346" key="GridCell.Tab.1.center" timestamp="1594772977541">
+    <state width="1875" height="346" key="GridCell.Tab.1.center" timestamp="1594773736005">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="346" key="GridCell.Tab.1.center/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594772977541" />
+    <state width="1875" height="346" key="GridCell.Tab.1.center/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594773736005" />
     <state width="1878" height="313" key="GridCell.Tab.1.center/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594578219121" />
-    <state width="1875" height="346" key="GridCell.Tab.1.left" timestamp="1594772977541">
+    <state width="1875" height="346" key="GridCell.Tab.1.left" timestamp="1594773736005">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="346" key="GridCell.Tab.1.left/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594772977541" />
+    <state width="1875" height="346" key="GridCell.Tab.1.left/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594773736005" />
     <state width="1878" height="313" key="GridCell.Tab.1.left/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594578219121" />
-    <state width="1875" height="346" key="GridCell.Tab.1.right" timestamp="1594772977541">
+    <state width="1875" height="346" key="GridCell.Tab.1.right" timestamp="1594773736005">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="346" key="GridCell.Tab.1.right/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594772977541" />
+    <state width="1875" height="346" key="GridCell.Tab.1.right/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594773736005" />
     <state width="1878" height="313" key="GridCell.Tab.1.right/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594578219121" />
     <state x="668" y="231" key="RollbackChangesDialog" timestamp="1594770568673">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="668" y="231" key="RollbackChangesDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594770568673" />
-    <state x="552" y="241" key="Vcs.Push.Dialog.v2" timestamp="1594673364511">
+    <state x="552" y="241" key="Vcs.Push.Dialog.v2" timestamp="1594773685118">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="241" key="Vcs.Push.Dialog.v2/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594673364511" />
+    <state x="552" y="241" key="Vcs.Push.Dialog.v2/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594773685118" />
     <state x="2550" y="346" key="com.intellij.ide.util.TipDialog" timestamp="1594568577969">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -384,27 +394,11 @@
     </state>
     <state x="624" y="225" key="run.anything.popup/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594671377207" />
     <state x="2544" y="234" key="run.anything.popup/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594506929390" />
-    <state x="623" y="232" width="672" height="653" key="search.everywhere.popup" timestamp="1594773610734">
+    <state x="623" y="232" width="672" height="653" key="search.everywhere.popup" timestamp="1594774144825">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="232" width="672" height="653" key="search.everywhere.popup/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594773610734" />
+    <state x="623" y="232" width="672" height="653" key="search.everywhere.popup/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594774144825" />
     <state x="2543" y="241" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594593898477" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/desafioandroid/feature/home/presentation/view/adapter/HomeAdapter.kt</url>
-          <line>122</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/desafioandroid/feature/home/repository/HomeDataSource.kt</url>
-          <line>52</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="masterDetails">
     <states>

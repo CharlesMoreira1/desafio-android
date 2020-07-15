@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 
 data class Resource<out T>(val status: Status, val data: T?, val throwable: Throwable?) {
 
-    enum class Status { SUCCESS, SUCCESS_PAGINATION, ERROR, ERROR_PAGINATION, LOADING, LOADING_PAGINATION, END_LIST }
+    enum class Status { SUCCESS, ERROR, LOADING }
 
     companion object {
         fun <T> success(data: T?): Resource<T> {
@@ -43,9 +43,6 @@ fun <T> LiveData<Resource<T>>.observeResource(
             }
             Resource.Status.LOADING -> {
                 onLoading.invoke()
-            }
-            else -> {
-                //Does nothing
             }
         }
     })

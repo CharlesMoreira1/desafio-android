@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.desafioandroid.R
 import com.desafioandroid.core.base.BaseActivity
-import com.desafioandroid.core.helper.Resource
+import com.desafioandroid.core.util.observeStatusPaging
 import com.desafioandroid.core.util.rotationAnimation
 import com.desafioandroid.feature.home.presentation.view.adapter.HomeAdapter
 import com.desafioandroid.feature.home.presentation.viewmodel.HomeViewModel
@@ -38,25 +38,22 @@ class HomeActivity : BaseActivity() {
             swipe_refresh.isRefreshing = false
         })
 
-        viewModel.getNetworkState.observe(this, Observer {
-            when (it) {
-                Resource.Status.SUCCESS -> {
-                    showSuccess()
+        viewModel.getNetworkState.observeStatusPaging(this,
+            onSuccess = {
+                showSuccess()
+            },
+            onError = {
+                showError()
+            },
+            onLoading = {
+                showLoading()
+            },
+            onOthers = {
+                homeAdapter.setStatus(it)
+                homeAdapter.onRetryClickListener = {
+                    viewModel.retry()
                 }
-                Resource.Status.ERROR -> {
-                    showError()
-                }
-                Resource.Status.LOADING -> {
-                    showLoading()
-                }
-                else -> {
-                    homeAdapter.setStatus(it)
-                    homeAdapter.onRetryClickListener = {
-                        viewModel.retry()
-                    }
-                }
-            }
-        })
+            })
     }
 
     private fun iniUi() {
