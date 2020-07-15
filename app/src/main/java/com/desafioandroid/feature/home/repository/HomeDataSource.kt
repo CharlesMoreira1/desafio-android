@@ -46,7 +46,7 @@ class HomeDataSource(private val scope: CoroutineScope, private val apiService: 
                     is HttpException -> {
                         mutableLiveDataNetworkState.value = Resource.Status.END_LIST
                     }
-                    is Exception -> {
+                    else -> {
                         retry = {
                             loadAfter(params, callback)
                         }

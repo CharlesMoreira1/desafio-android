@@ -11,7 +11,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72a47b95-4836-4760-849b-c54cf53290c4" name="Default Changelist" comment=":rocket: App finalizado.">
+    <list default="true" id="72a47b95-4836-4760-849b-c54cf53290c4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -20,21 +20,12 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_bumptech_glide_gifdecoder_4_9_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_bumptech_glide_gifdecoder_4_9_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_bumptech_glide_glide_4_9_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_bumptech_glide_glide_4_9_0_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/core/helper/Resource.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/core/helper/Resource.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/core/util/PagingLibraryUtil.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/core/util/PagingLibraryUtil.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/feature/home/presentation/view/activity/HomeActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/feature/home/presentation/view/activity/HomeActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/core/customview/ItemReload.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/core/customview/ItemReload.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/feature/home/presentation/view/adapter/HomeAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/feature/home/presentation/view/adapter/HomeAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/feature/home/presentation/viewmodel/HomeViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/feature/home/presentation/viewmodel/HomeViewModel.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/feature/home/repository/HomeDataSource.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/desafioandroid/feature/home/repository/HomeDataSource.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,11 +54,6 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>recruiting</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -86,6 +72,7 @@
     <property name="DEBUGGABLE_DEVICE" value="emulator-5554" />
     <property name="DEBUGGABLE_PROCESS" value="com.desafioandroid" />
     <property name="DEBUGGER_ID" value="Auto" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
@@ -275,7 +262,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568572790743</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary=":zap: Adicionado loading bottom no adapter.">
+      <created>1594673354863</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1594673354863</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -298,7 +292,8 @@
     <MESSAGE value=":sparkles: Adicionado segunda tela de pull request com suas devidas validações." />
     <MESSAGE value=":rocket: App finalizado." />
     <MESSAGE value=":zap: Adicionado paging do jetpack para teste." />
-    <option name="LAST_COMMIT_MESSAGE" value=":zap: Adicionado paging do jetpack para teste." />
+    <MESSAGE value=":zap: Adicionado loading bottom no adapter." />
+    <option name="LAST_COMMIT_MESSAGE" value=":zap: Adicionado loading bottom no adapter." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2660" y="237" width="429" height="571" key="#com.intellij.ide.util.MemberChooser" timestamp="1594511066309">
@@ -313,60 +308,69 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="715" y="223" key="#xdebugger.evaluate/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594671082693" />
-    <state x="817" y="275" width="286" height="473" key="AndroidProcessChooserDialog" timestamp="1594671049338">
+    <state x="817" y="275" width="286" height="473" key="AndroidProcessChooserDialog" timestamp="1594772677180">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="817" y="275" key="AndroidProcessChooserDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594671049338" />
+    <state x="817" y="275" key="AndroidProcessChooserDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594772677180" />
     <state x="2737" y="286" width="286" height="473" key="AndroidProcessChooserDialog/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594576626084" />
-    <state x="2121" y="106" width="1508" height="833" key="CommitChangelistDialog2" timestamp="1594594177861">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="201" y="102" width="1508" height="833" key="CommitChangelistDialog2" timestamp="1594673477649">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="201" y="102" key="CommitChangelistDialog2/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594673477649" />
     <state x="2121" y="106" width="1508" height="833" key="CommitChangelistDialog2/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594594177861" />
-    <state x="-1997" y="-29" width="1720" height="742" key="DiffContextDialog" timestamp="1594672548315">
-      <screen x="-1920" y="0" width="1536" height="832" />
+    <state x="259" y="227" width="1414" height="705" key="DiffContextDialog" timestamp="1594770961621">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="-1997" y="-29" width="1720" height="742" key="DiffContextDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594672548315" />
+    <state x="259" y="227" width="1414" height="705" key="DiffContextDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594770961621" />
     <state x="2020" y="127" width="1720" height="783" key="DiffContextDialog/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594592712592" />
-    <state width="1875" height="581" key="GridCell.Tab.0.bottom" timestamp="1594672684767">
+    <state width="1875" height="597" key="GridCell.Tab.0.bottom" timestamp="1594773578235">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="581" key="GridCell.Tab.0.bottom/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594672684767" />
+    <state width="1875" height="597" key="GridCell.Tab.0.bottom/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594773578235" />
     <state width="1878" height="452" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594594049102" />
-    <state width="1875" height="581" key="GridCell.Tab.0.center" timestamp="1594672684766">
+    <state width="1875" height="597" key="GridCell.Tab.0.center" timestamp="1594773578235">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="581" key="GridCell.Tab.0.center/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594672684766" />
+    <state width="1875" height="597" key="GridCell.Tab.0.center/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594773578235" />
     <state width="1878" height="452" key="GridCell.Tab.0.center/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594594049102" />
-    <state width="1875" height="581" key="GridCell.Tab.0.left" timestamp="1594672684766">
+    <state width="1875" height="597" key="GridCell.Tab.0.left" timestamp="1594773578235">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="581" key="GridCell.Tab.0.left/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594672684766" />
+    <state width="1875" height="597" key="GridCell.Tab.0.left/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594773578235" />
     <state width="1878" height="452" key="GridCell.Tab.0.left/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594594049102" />
-    <state width="1875" height="581" key="GridCell.Tab.0.right" timestamp="1594672684766">
+    <state width="1875" height="597" key="GridCell.Tab.0.right" timestamp="1594773578235">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="581" key="GridCell.Tab.0.right/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594672684766" />
+    <state width="1875" height="597" key="GridCell.Tab.0.right/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594773578235" />
     <state width="1878" height="452" key="GridCell.Tab.0.right/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594594049102" />
-    <state width="1875" height="346" key="GridCell.Tab.1.bottom" timestamp="1594671091832">
+    <state width="1875" height="346" key="GridCell.Tab.1.bottom" timestamp="1594772977541">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="346" key="GridCell.Tab.1.bottom/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594671091832" />
+    <state width="1875" height="346" key="GridCell.Tab.1.bottom/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594772977541" />
     <state width="1878" height="313" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594578219121" />
-    <state width="1875" height="346" key="GridCell.Tab.1.center" timestamp="1594671091832">
+    <state width="1875" height="346" key="GridCell.Tab.1.center" timestamp="1594772977541">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="346" key="GridCell.Tab.1.center/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594671091832" />
+    <state width="1875" height="346" key="GridCell.Tab.1.center/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594772977541" />
     <state width="1878" height="313" key="GridCell.Tab.1.center/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594578219121" />
-    <state width="1875" height="346" key="GridCell.Tab.1.left" timestamp="1594671091832">
+    <state width="1875" height="346" key="GridCell.Tab.1.left" timestamp="1594772977541">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="346" key="GridCell.Tab.1.left/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594671091832" />
+    <state width="1875" height="346" key="GridCell.Tab.1.left/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594772977541" />
     <state width="1878" height="313" key="GridCell.Tab.1.left/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594578219121" />
-    <state width="1875" height="346" key="GridCell.Tab.1.right" timestamp="1594671091832">
+    <state width="1875" height="346" key="GridCell.Tab.1.right" timestamp="1594772977541">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="346" key="GridCell.Tab.1.right/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594671091832" />
+    <state width="1875" height="346" key="GridCell.Tab.1.right/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594772977541" />
     <state width="1878" height="313" key="GridCell.Tab.1.right/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594578219121" />
+    <state x="668" y="231" key="RollbackChangesDialog" timestamp="1594770568673">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="668" y="231" key="RollbackChangesDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594770568673" />
+    <state x="552" y="241" key="Vcs.Push.Dialog.v2" timestamp="1594673364511">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="241" key="Vcs.Push.Dialog.v2/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594673364511" />
     <state x="2550" y="346" key="com.intellij.ide.util.TipDialog" timestamp="1594568577969">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -380,11 +384,27 @@
     </state>
     <state x="624" y="225" key="run.anything.popup/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594671377207" />
     <state x="2544" y="234" key="run.anything.popup/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594506929390" />
-    <state x="623" y="232" width="672" height="653" key="search.everywhere.popup" timestamp="1594673193136">
+    <state x="623" y="232" width="672" height="653" key="search.everywhere.popup" timestamp="1594773610734">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="232" width="672" height="653" key="search.everywhere.popup/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594673193136" />
+    <state x="623" y="232" width="672" height="653" key="search.everywhere.popup/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594773610734" />
     <state x="2543" y="241" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1080/0.103.1920.1080@1920.0.1920.1080" timestamp="1594593898477" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/desafioandroid/feature/home/presentation/view/adapter/HomeAdapter.kt</url>
+          <line>122</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/desafioandroid/feature/home/repository/HomeDataSource.kt</url>
+          <line>52</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="masterDetails">
     <states>

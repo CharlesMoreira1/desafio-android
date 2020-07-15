@@ -62,10 +62,13 @@ class HomeAdapter : PagedListAdapter<Item, RecyclerView.ViewHolder>(DIFF_CALLBAC
 
     fun setStatus(status: Resource.Status) {
         this.status = status
-        if (status == Resource.Status.LOADING_PAGINATION) {
-            isLoading = true
-        } else if (status == Resource.Status.END_LIST) {
-            isLoading = false
+
+        isLoading = if (status == Resource.Status.LOADING_PAGINATION || status == Resource.Status.ERROR_PAGINATION) {
+            notifyItemChanged(super.getItemCount())
+            true
+        } else {
+            notifyItemRemoved(itemCount-1)
+            false
         }
     }
 
